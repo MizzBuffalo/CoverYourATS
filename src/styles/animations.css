@@ -1,0 +1,73 @@
+/* Glitch text effect */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-skew {
+  0%, 100% { transform: skew(0deg); }
+  20% { transform: skew(-2deg); }
+  40% { transform: skew(1deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(2deg); }
+}
+
+/* Scan line sweep */
+@keyframes scan-line {
+  0% { top: -5%; }
+  100% { top: 105%; }
+}
+
+/* Neon pulse */
+@keyframes neon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Neon border glow */
+@keyframes border-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 204, 0.3), inset 0 0 5px rgba(0, 255, 204, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.5), inset 0 0 10px rgba(0, 255, 204, 0.15);
+  }
+}
+
+/* Progress bar fill */
+@keyframes bar-fill {
+  from { width: 0%; }
+}
+
+/* Typewriter cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Threat alert flash */
+@keyframes threat-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Fade in up */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Spin (for loading states) */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
