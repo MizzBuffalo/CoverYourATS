@@ -1,0 +1,21 @@
+export const STOPWORDS = new Set([
+  'a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
+  'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'be',
+  'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will',
+  'would', 'could', 'should', 'may', 'might', 'shall', 'can', 'need',
+  'must', 'it', 'its', 'this', 'that', 'these', 'those', 'i', 'we',
+  'you', 'he', 'she', 'they', 'me', 'us', 'him', 'her', 'them', 'my',
+  'our', 'your', 'his', 'their', 'what', 'which', 'who', 'whom', 'when',
+  'where', 'why', 'how', 'all', 'each', 'every', 'both', 'few', 'more',
+  'most', 'other', 'some', 'such', 'no', 'not', 'only', 'own', 'same',
+  'so', 'than', 'too', 'very', 'just', 'because', 'if', 'about', 'into',
+  'through', 'during', 'before', 'after', 'above', 'below', 'between',
+  'out', 'off', 'over', 'under', 'again', 'further', 'then', 'once',
+  'also', 'etc', 'including', 'including', 'per', 'via', 'using',
+  // Job posting filler
+  'role', 'position', 'candidate', 'company', 'team', 'work', 'working',
+  'experience', 'years', 'year', 'required', 'preferred', 'ability',
+  'strong', 'excellent', 'responsibilities', 'qualifications', 'job',
+  'apply', 'application', 'opportunity', 'looking', 'join', 'ideal',
+  'must', 'minimum', 'plus', 'bonus', 'equal', 'employer', 'description',
+])

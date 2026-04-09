@@ -1,11 +1,22 @@
+import { useState } from 'react'
 import { Card } from '../ui/Card'
 import { Button } from '../ui/Button'
+import { TextPasteArea } from '../input/TextPasteArea'
+import { FileDropZone } from '../input/FileDropZone'
+import { InputMethodToggle } from '../input/InputMethodToggle'
 import { useAppStore } from '../../stores/useAppStore'
+import { normalizeText } from '../../services/parsers/textParser'
 
 export default function Step2_ResumeInput() {
+  const [method, setMethod] = useState<'paste' | 'upload'>('paste')
   const nextStep = useAppStore((s) => s.nextStep)
   const resumeRawText = useAppStore((s) => s.resumeRawText)
   const setResumeText = useAppStore((s) => s.setResumeText)
+
+  const handleFileLoaded = (text: string) => {
+    setResumeText(normalizeText(text))
+    setMethod('paste')
+  }
 
   return (
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out]">
@@ -18,21 +29,22 @@ export default function Step2_ResumeInput() {
         </p>
       </div>
 
+      <InputMethodToggle method={method} onChange={setMethod} />
+
       <Card>
-        <textarea
-          value={resumeRawText || ''}
-          onChange={(e) => setResumeText(e.target.value)}
-          placeholder="Paste your resume content here..."
-          className="w-full h-64 bg-cyber-dark border border-cyber-border rounded-sm p-4 font-mono text-sm text-text-primary placeholder:text-text-muted resize-none focus:outline-none focus:border-neon-cyan/50 transition-colors"
-        />
+        {method === 'paste' ? (
+          <TextPasteArea
+            value={resumeRawText || ''}
+            onChange={setResumeText}
+            placeholder="Paste your full resume here — include all sections: summary, experience, education, skills..."
+          />
+        ) : (
+          <FileDropZone onFileLoaded={handleFileLoaded} />
+        )}
       </Card>
 
       <div className="flex justify-end">
-        <Button
-          onClick={nextStep}
-          disabled={!resumeRawText?.trim()}
-          size="lg"
-        >
+        <Button onClick={nextStep} disabled={!resumeRawText?.trim()} size="lg">
           Analyze Profile →
         </Button>
       </div>
