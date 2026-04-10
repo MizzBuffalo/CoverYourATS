@@ -64,6 +64,7 @@ export async function callAI(task: AITask, prompt: string): Promise<AIResponse> 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
           'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
         },
         body: JSON.stringify({ task, prompt }),
@@ -124,7 +125,10 @@ export async function checkAIHealth(): Promise<{
   try {
     const response = await fetch(EDGE_FUNCTION_URL, {
       method: 'GET',
-      headers: { 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      },
     })
 
     if (!response.ok) {

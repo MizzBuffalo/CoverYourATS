@@ -103,6 +103,7 @@ describe('callAI', () => {
     const options = fetchCall[1] as RequestInit
     const headers = options.headers as Record<string, string>
     expect(headers['Content-Type']).toBe('application/json')
+    expect(headers['apikey']).toBe('test-anon-key')
     expect(headers['Authorization']).toBe('Bearer test-anon-key')
   })
 })
