@@ -17,8 +17,8 @@ export function Button({
   return (
     <button
       className={cn(
-        'relative font-mono font-semibold uppercase tracking-wider transition-all duration-200',
-        'border cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed',
+        'relative theme-label transition-all border cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed',
+        'rounded-[var(--theme-radius)]',
         {
           'bg-neon-cyan/10 text-neon-cyan border-neon-cyan/50 hover:bg-neon-cyan/20 hover:shadow-[0_0_20px_rgba(var(--glow-cyan),0.3)]':
             variant === 'primary',

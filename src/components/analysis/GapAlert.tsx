@@ -20,7 +20,7 @@ export function GapAlert({ missingKeywords, maxShow = 5 }: GapAlertProps) {
           ⚠
         </span>
         <div className="space-y-2 flex-1">
-          <h4 className="font-mono text-sm text-neon-red uppercase tracking-wider">
+          <h4 className="theme-label text-sm text-neon-red">
             Critical Gaps Detected
           </h4>
           <p className="text-xs text-text-secondary">
@@ -30,7 +30,7 @@ export function GapAlert({ missingKeywords, maxShow = 5 }: GapAlertProps) {
             {critical.map((kw) => (
               <span
                 key={kw.keyword}
-                className="px-2 py-0.5 text-xs font-mono bg-neon-red/10 text-neon-red border border-neon-red/30 rounded-sm animate-[threat-flash_1.5s_ease-in-out_infinite]"
+                className="px-2 py-0.5 text-xs font-mono bg-neon-red/10 text-neon-red border border-neon-red/30 rounded-[var(--theme-radius)] animate-[threat-flash_1.5s_ease-in-out_infinite]"
               >
                 {kw.keyword}
               </span>

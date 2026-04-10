@@ -16,7 +16,8 @@ export function Card({ glow = false, glowColor = 'cyan', className, children, ..
   return (
     <div
       className={cn(
-        'bg-cyber-panel border border-cyber-border rounded-sm p-4',
+        'theme-card-bg border border-cyber-border p-4',
+        'rounded-[var(--theme-radius)]',
         glow && glowColors[glowColor],
         className
       )}

@@ -43,16 +43,16 @@ export function ScoreDashboard({ overallScore, categoryScores }: ScoreDashboardP
           )}
           style={{ borderColor: 'currentColor' }}
         >
-          <span className={cn('text-4xl font-mono font-bold', scoreColor)}>
+          <span className={cn('text-4xl font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold', scoreColor)}>
             {overallScore}
           </span>
-          <span className="text-xs font-mono text-text-muted">/ 100</span>
+          <span className="text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] text-text-muted">/ 100</span>
         </div>
         <div className="text-center">
-          <p className="text-xs font-mono text-text-muted uppercase tracking-wider">
+          <p className="theme-label text-xs text-text-muted">
             ATS Match Score
           </p>
-          <p className={cn('text-sm font-mono font-bold', scoreColor)}>
+          <p className={cn('text-sm font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold', scoreColor)}>
             THREAT LEVEL: {threatLevel}
           </p>
         </div>

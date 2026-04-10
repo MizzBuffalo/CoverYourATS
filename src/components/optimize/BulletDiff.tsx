@@ -7,16 +7,16 @@ interface BulletDiffProps {
 
 export function BulletDiff({ bullet }: BulletDiffProps) {
   return (
-    <div className="border border-cyber-border rounded-sm overflow-hidden">
+    <div className="border border-cyber-border rounded-[var(--theme-radius)] overflow-hidden">
       <div className="grid md:grid-cols-2 divide-x divide-cyber-border">
         <div className="p-3">
-          <span className="text-[10px] font-mono text-neon-red uppercase tracking-wider block mb-1">
+          <span className="text-[10px] theme-label text-neon-red block mb-1">
             Original
           </span>
           <p className="text-sm text-text-secondary">{bullet.original}</p>
         </div>
         <div className="p-3 bg-neon-green/[0.02]">
-          <span className="text-[10px] font-mono text-neon-green uppercase tracking-wider block mb-1">
+          <span className="text-[10px] theme-label text-neon-green block mb-1">
             Optimized
           </span>
           <p className="text-sm text-text-primary">{bullet.rewritten}</p>
@@ -27,7 +27,7 @@ export function BulletDiff({ bullet }: BulletDiffProps) {
                   key={kw}
                   className={cn(
                     'px-1.5 py-0.5 text-[10px] font-mono',
-                    'bg-neon-green/10 text-neon-green border border-neon-green/30 rounded-sm'
+                    'bg-neon-green/10 text-neon-green border border-neon-green/30 rounded-[var(--theme-radius)]'
                   )}
                 >
                   +{kw}

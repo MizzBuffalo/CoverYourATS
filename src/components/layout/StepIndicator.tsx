@@ -21,7 +21,7 @@ export function StepIndicator() {
                   onClick={() => canClick && setStep(step.id)}
                   disabled={!canClick}
                   className={cn(
-                    'flex items-center gap-1.5 sm:gap-2 font-mono text-xs transition-colors',
+                    'flex items-center gap-1.5 sm:gap-2 text-xs transition-colors font-[family-name:var(--theme-heading-font,var(--font-mono))]',
                     isActive && 'text-neon-cyan',
                     isComplete && 'text-neon-green cursor-pointer hover:text-neon-cyan',
                     !isActive && !isComplete && 'text-text-muted',
@@ -30,7 +30,7 @@ export function StepIndicator() {
                 >
                   <span
                     className={cn(
-                      'w-6 h-6 flex items-center justify-center border rounded-sm text-[10px] flex-shrink-0',
+                      'w-6 h-6 flex items-center justify-center border rounded-[var(--theme-radius)] text-[10px] flex-shrink-0',
                       isActive && 'border-neon-cyan bg-neon-cyan/10',
                       isComplete && 'border-neon-green bg-neon-green/10',
                       !isActive && !isComplete && 'border-cyber-border'

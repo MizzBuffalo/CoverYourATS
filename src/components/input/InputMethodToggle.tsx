@@ -8,11 +8,11 @@ interface InputMethodToggleProps {
 
 export function InputMethodToggle({ method, onChange, className }: InputMethodToggleProps) {
   return (
-    <div className={cn('flex border border-cyber-border rounded-sm overflow-hidden', className)}>
+    <div className={cn('flex border border-cyber-border rounded-[var(--theme-radius)] overflow-hidden', className)}>
       <button
         onClick={() => onChange('paste')}
         className={cn(
-          'flex-1 px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors',
+          'flex-1 px-4 py-2 theme-label text-xs transition-colors',
           method === 'paste'
             ? 'bg-neon-cyan/10 text-neon-cyan border-r border-cyber-border'
             : 'text-text-muted hover:text-text-secondary border-r border-cyber-border'
@@ -23,7 +23,7 @@ export function InputMethodToggle({ method, onChange, className }: InputMethodTo
       <button
         onClick={() => onChange('upload')}
         className={cn(
-          'flex-1 px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors',
+          'flex-1 px-4 py-2 theme-label text-xs transition-colors',
           method === 'upload'
             ? 'bg-neon-cyan/10 text-neon-cyan'
             : 'text-text-muted hover:text-text-secondary'

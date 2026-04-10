@@ -15,10 +15,10 @@ export function CategoryScoreBar({ categoryScore }: CategoryScoreBarProps) {
   return (
     <div className="space-y-1">
       <div className="flex justify-between items-baseline">
-        <span className="text-sm font-mono text-text-primary">
+        <span className="text-sm font-[family-name:var(--theme-heading-font,var(--font-mono))] text-text-primary">
           {CATEGORY_LABELS[category]}
         </span>
-        <span className="text-xs font-mono text-text-muted">
+        <span className="text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] text-text-muted">
           {matched.length}/{total} matched
         </span>
       </div>

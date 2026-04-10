@@ -17,7 +17,7 @@ export function TextPasteArea({ value, onChange, placeholder, className }: TextP
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={cn(
-          'w-full h-64 bg-cyber-dark border border-cyber-border rounded-sm p-4',
+          'w-full h-64 bg-cyber-dark border border-cyber-border rounded-[var(--theme-radius)] p-4',
           'font-mono text-sm text-text-primary placeholder:text-text-muted',
           'resize-none focus:outline-none focus:border-neon-cyan/50 transition-colors'
         )}

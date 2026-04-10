@@ -6,8 +6,8 @@ export function Header() {
     <header className="border-b border-cyber-border bg-cyber-black/80 backdrop-blur-sm sticky top-0 z-30">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 border border-neon-cyan/50 rounded-sm flex items-center justify-center">
-            <span className="text-neon-cyan font-mono text-xs font-bold">ATS</span>
+          <div className="w-8 h-8 border border-neon-cyan/50 rounded-[var(--theme-radius)] flex items-center justify-center">
+            <span className="text-neon-cyan text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold">ATS</span>
           </div>
           <GlitchText
             text="CoverYourATS"
@@ -18,7 +18,7 @@ export function Header() {
         </div>
         <div className="flex items-center gap-4">
           <ThemePicker />
-          <span className="text-xs font-mono text-text-muted hidden sm:block">
+          <span className="text-xs text-text-muted hidden sm:block font-[family-name:var(--theme-heading-font,var(--font-mono))]">
             RESUME KEYWORD OPTIMIZER
           </span>
         </div>

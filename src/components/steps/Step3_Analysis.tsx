@@ -100,7 +100,7 @@ export default function Step3_Analysis() {
   return (
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out] relative">
       <div>
-        <h2 className="font-mono text-neon-cyan text-lg uppercase tracking-wider mb-1">
+        <h2 className="theme-label text-neon-cyan text-lg mb-1">
           Step 3: Gap Analysis
         </h2>
         <p className="text-text-secondary text-sm">
@@ -136,7 +136,7 @@ export default function Step3_Analysis() {
           </Card>
 
           <Card>
-            <h3 className="font-mono text-sm text-neon-cyan uppercase tracking-wider mb-4">
+            <h3 className="theme-label text-sm text-neon-cyan mb-4">
               Keyword Breakdown
             </h3>
             <div className="space-y-4">

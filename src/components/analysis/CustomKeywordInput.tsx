@@ -23,7 +23,7 @@ export function CustomKeywordInput() {
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <p className="text-xs font-mono text-text-muted uppercase tracking-wider">
+        <p className="theme-label text-xs text-text-muted">
           Missing something?
         </p>
       </div>
@@ -34,12 +34,12 @@ export function CustomKeywordInput() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Add a keyword the scanner missed..."
-          className="flex-1 bg-cyber-dark border border-cyber-border rounded-sm px-3 py-2 text-sm text-text-primary font-mono placeholder:text-text-muted/50 focus:outline-none focus:border-neon-cyan/50 transition-colors"
+          className="flex-1 bg-cyber-dark border border-cyber-border rounded-[var(--theme-radius)] px-3 py-2 text-sm text-text-primary font-mono placeholder:text-text-muted/50 focus:outline-none focus:border-neon-cyan/50 transition-colors"
         />
         <button
           onClick={handleAdd}
           disabled={!input.trim()}
-          className="px-4 py-2 text-xs font-mono uppercase bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30 rounded-sm hover:bg-neon-cyan/20 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          className="px-4 py-2 text-xs font-mono uppercase bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30 rounded-[var(--theme-radius)] hover:bg-neon-cyan/20 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
         >
           Add
         </button>
@@ -49,7 +49,7 @@ export function CustomKeywordInput() {
           {customKeywords.map((kw) => (
             <span
               key={kw.keyword}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20 rounded-sm"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20 rounded-[var(--theme-radius)]"
             >
               {kw.keyword}
               <button

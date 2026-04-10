@@ -11,21 +11,21 @@ export function ScoreComparison({ beforeScore, afterScore }: ScoreComparisonProp
   return (
     <div className="flex items-center justify-center gap-6">
       <div className="text-center">
-        <p className="text-xs font-mono text-text-muted uppercase mb-1">Before</p>
+        <p className="text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] text-text-muted uppercase mb-1">Before</p>
         <div className="w-20 h-20 rounded-full border-2 border-neon-red/50 flex items-center justify-center shadow-[0_0_15px_rgba(var(--glow-red),0.2)]">
-          <span className="text-2xl font-mono font-bold text-neon-red">{beforeScore}</span>
+          <span className="text-2xl font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold text-neon-red">{beforeScore}</span>
         </div>
       </div>
 
       <div className="flex flex-col items-center gap-1">
-        <span className="text-neon-cyan font-mono text-lg">→</span>
+        <span className="text-neon-cyan font-[family-name:var(--theme-heading-font,var(--font-mono))] text-lg">→</span>
         {improvement > 0 && (
-          <span className="text-xs font-mono text-neon-green">+{improvement}</span>
+          <span className="text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] text-neon-green">+{improvement}</span>
         )}
       </div>
 
       <div className="text-center">
-        <p className="text-xs font-mono text-text-muted uppercase mb-1">After</p>
+        <p className="text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] text-text-muted uppercase mb-1">After</p>
         <div className={cn(
           'w-20 h-20 rounded-full border-2 flex items-center justify-center',
           afterScore >= 80
@@ -33,7 +33,7 @@ export function ScoreComparison({ beforeScore, afterScore }: ScoreComparisonProp
             : 'border-neon-yellow/50 shadow-[0_0_15px_rgba(var(--glow-yellow),0.2)]'
         )}>
           <span className={cn(
-            'text-2xl font-mono font-bold',
+            'text-2xl font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold',
             afterScore >= 80 ? 'text-neon-green' : 'text-neon-yellow'
           )}>
             {afterScore}

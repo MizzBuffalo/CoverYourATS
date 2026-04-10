@@ -11,7 +11,8 @@ export function GlitchText({ text, className, as: Tag = 'span', active = true }:
   return (
     <Tag
       className={cn(
-        'relative inline-block font-mono font-bold',
+        'glitch-text relative inline-block font-bold',
+        'font-[family-name:var(--theme-heading-font,var(--font-mono))]',
         active && 'animate-[glitch_0.3s_ease-in-out_infinite_alternate]',
         className
       )}
