@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import type { ExtractedKeyword, KeywordCategory } from '../../types'
 import { extractKeywordsRuleBased } from './ruleBasedExtractor'
 import { deduplicateAndRank } from './ranker'
@@ -28,25 +29,48 @@ const VALID_CATEGORIES: Set<string> = new Set([
   'hard_skill', 'soft_skill', 'certification', 'tool', 'industry_term',
 ])
 
+// Zod schema for validating AI keyword extraction responses
+const aiKeywordSchema = z.object({
+  keyword: z.string().min(1),
+  category: z.string().optional(),
+  importance: z.number().min(0).max(1).optional(),
+})
+
+const aiKeywordsArraySchema = z.array(aiKeywordSchema)
+
 function parseAIKeywords(data: unknown): ExtractedKeyword[] {
-  let items: Array<{ keyword?: string; category?: string; importance?: number }>
+  try {
+    let raw: unknown
 
-  if (typeof data === 'string') {
-    const cleaned = data.replace(/```json\s?/g, '').replace(/```/g, '').trim()
-    items = JSON.parse(cleaned)
-  } else if (Array.isArray(data)) {
-    items = data
-  } else {
-    return []
-  }
+    if (typeof data === 'string') {
+      const cleaned = data.replace(/```json\s?/g, '').replace(/```/g, '').trim()
+      raw = JSON.parse(cleaned)
+    } else if (Array.isArray(data)) {
+      raw = data
+    } else {
+      return []
+    }
 
-  return items
-    .filter((item) => item.keyword && typeof item.keyword === 'string')
-    .map((item) => ({
-      keyword: item.keyword!.trim(),
+    // Handle both { keywords: [...] } wrapper and bare array
+    if (raw && typeof raw === 'object' && !Array.isArray(raw) && 'keywords' in raw) {
+      raw = (raw as Record<string, unknown>).keywords
+    }
+
+    const parsed = aiKeywordsArraySchema.safeParse(raw)
+    if (!parsed.success) {
+      console.warn('AI keyword response failed validation:', parsed.error.message)
+      return []
+    }
+
+    return parsed.data.map((item) => ({
+      keyword: item.keyword.trim(),
       category: (VALID_CATEGORIES.has(item.category ?? '') ? item.category : 'hard_skill') as KeywordCategory,
-      importance: typeof item.importance === 'number' ? Math.min(1, Math.max(0, item.importance)) : 0.5,
+      importance: item.importance ?? 0.5,
       frequency: 1,
       source: 'ai' as const,
     }))
+  } catch (err) {
+    console.warn('Failed to parse AI keywords:', err instanceof Error ? err.message : err)
+    return []
+  }
 }

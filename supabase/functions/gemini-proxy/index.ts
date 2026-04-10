@@ -1,4 +1,4 @@
-import { corsHeaders, handleCors } from '../_shared/cors.ts'
+import { getCorsHeaders, handleCors } from '../_shared/cors.ts'
 import { checkRateLimit, getClientIp } from '../_shared/rateLimiter.ts'
 import { callGemini } from '../_shared/providers/gemini.ts'
 import type { AITask } from '../_shared/providers/types.ts'
@@ -6,15 +6,34 @@ import type { AITask } from '../_shared/providers/types.ts'
 const VALID_TASKS: AITask[] = ['keyword_extraction', 'bullet_rewrite', 'cover_letter']
 
 Deno.serve(async (req: Request) => {
+  const headers = getCorsHeaders(req)
+
   // Handle CORS preflight
   const corsResponse = handleCors(req)
   if (corsResponse) return corsResponse
+
+  // Health-check endpoint (GET)
+  if (req.method === 'GET') {
+    const hasApiKey = !!Deno.env.get('GEMINI_API_KEY')
+    return new Response(
+      JSON.stringify({
+        status: 'ok',
+        model: 'gemini-2.5-flash',
+        hasApiKey,
+        timestamp: new Date().toISOString(),
+      }),
+      {
+        status: 200,
+        headers: { ...headers, 'Content-Type': 'application/json' },
+      }
+    )
+  }
 
   // Only allow POST
   if (req.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {
       status: 405,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      headers: { ...headers, 'Content-Type': 'application/json' },
     })
   }
 
@@ -34,7 +53,7 @@ Deno.serve(async (req: Request) => {
         }),
         {
           status: 429,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          headers: { ...headers, 'Content-Type': 'application/json' },
         }
       )
     }
@@ -48,7 +67,7 @@ Deno.serve(async (req: Request) => {
         JSON.stringify({ error: `Invalid task. Must be one of: ${VALID_TASKS.join(', ')}` }),
         {
           status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          headers: { ...headers, 'Content-Type': 'application/json' },
         }
       )
     }
@@ -58,7 +77,7 @@ Deno.serve(async (req: Request) => {
         JSON.stringify({ error: 'Prompt is required and must be at least 10 characters' }),
         {
           status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          headers: { ...headers, 'Content-Type': 'application/json' },
         }
       )
     }
@@ -83,7 +102,7 @@ Deno.serve(async (req: Request) => {
       }),
       {
         status: 200,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        headers: { ...headers, 'Content-Type': 'application/json' },
       }
     )
   } catch (error) {
@@ -95,12 +114,12 @@ Deno.serve(async (req: Request) => {
         success: false,
         error: isRateLimit
           ? 'AI service is temporarily rate limited. Try the "Copy AI Prompt" button instead.'
-          : 'Failed to process request. Try the "Copy AI Prompt" button as a fallback.',
+          : `AI request failed: ${message}`,
         rateLimited: isRateLimit,
       }),
       {
         status: isRateLimit ? 429 : 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        headers: { ...headers, 'Content-Type': 'application/json' },
       }
     )
   }
