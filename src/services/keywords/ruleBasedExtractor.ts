@@ -67,7 +67,7 @@ function extractNGrams(text: string): Map<string, number> {
   // Bigrams
   for (let i = 0; i < words.length - 1; i++) {
     const bigram = `${words[i]} ${words[i + 1]}`
-    if (STOPWORDS.has(words[i]) && STOPWORDS.has(words[i + 1])) continue
+    if (STOPWORDS.has(words[i]) || STOPWORDS.has(words[i + 1])) continue
     counts.set(bigram, (counts.get(bigram) || 0) + 1)
   }
 

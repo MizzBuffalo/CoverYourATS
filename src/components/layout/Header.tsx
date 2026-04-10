@@ -1,4 +1,5 @@
 import { GlitchText } from '../animations/GlitchText'
+import { ThemePicker } from '../ui/ThemePicker'
 
 export function Header() {
   return (
@@ -15,9 +16,12 @@ export function Header() {
             active={false}
           />
         </div>
-        <span className="text-xs font-mono text-text-muted hidden sm:block">
-          RESUME KEYWORD OPTIMIZER
-        </span>
+        <div className="flex items-center gap-4">
+          <ThemePicker />
+          <span className="text-xs font-mono text-text-muted hidden sm:block">
+            RESUME KEYWORD OPTIMIZER
+          </span>
+        </div>
       </div>
     </header>
   )

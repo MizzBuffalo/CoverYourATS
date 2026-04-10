@@ -17,10 +17,10 @@ export function ScoreDashboard({ overallScore, categoryScores }: ScoreDashboardP
 
   const glowColor =
     overallScore >= 80
-      ? 'shadow-[0_0_30px_rgba(57,255,20,0.3)]'
+      ? 'shadow-[0_0_30px_rgba(var(--glow-green),0.3)]'
       : overallScore >= 50
-        ? 'shadow-[0_0_30px_rgba(255,204,0,0.3)]'
-        : 'shadow-[0_0_30px_rgba(255,0,64,0.3)]'
+        ? 'shadow-[0_0_30px_rgba(var(--glow-yellow),0.3)]'
+        : 'shadow-[0_0_30px_rgba(var(--glow-red),0.3)]'
 
   const threatLevel =
     overallScore >= 80

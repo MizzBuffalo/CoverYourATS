@@ -11,11 +11,17 @@ export async function callAI(task: AITask, prompt: string): Promise<AIResponse> 
   }
 
   try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 30000)
+
     const response = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ task, prompt }),
+      signal: controller.signal,
     })
+
+    clearTimeout(timeout)
 
     const result = await response.json()
 
@@ -43,10 +49,13 @@ export async function callAI(task: AITask, prompt: string): Promise<AIResponse> 
       remaining: result.remaining,
     }
   } catch (err) {
+    const isTimeout = err instanceof DOMException && err.name === 'AbortError'
     return {
       success: false,
       data: null,
-      error: err instanceof Error ? err.message : 'Network error. Try the "Copy AI Prompt" button.',
+      error: isTimeout
+        ? 'Request timed out. Try the "Copy AI Prompt" button instead.'
+        : err instanceof Error ? err.message : 'Network error. Try the "Copy AI Prompt" button.',
     }
   }
 }

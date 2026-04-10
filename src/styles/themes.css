@@ -1,0 +1,100 @@
+/* Theme system — override Tailwind v4 @theme CSS custom properties per theme */
+/* Glow RGB triplets are used in rgba() for box-shadow effects */
+
+:root {
+  --glow-cyan: 0, 255, 204;
+  --glow-green: 57, 255, 20;
+  --glow-red: 255, 0, 64;
+  --glow-yellow: 255, 204, 0;
+}
+
+/* ═══════ Neon Cyan (default) ═══════ */
+/* Uses the base @theme values from globals.css — no overrides needed */
+
+/* ═══════ Hacker Blue ═══════ */
+html[data-theme="hacker-blue"] {
+  --color-cyber-black: #060d1f;
+  --color-cyber-dark: #0a1225;
+  --color-cyber-panel: #0f1a30;
+  --color-cyber-border: #1a2d50;
+  --color-neon-cyan: #4da6ff;
+  --color-neon-green: #00e676;
+  --color-neon-red: #ff3d71;
+  --color-neon-yellow: #ffaa00;
+  --color-text-primary: #d6e4f0;
+  --color-text-secondary: #8aa8c7;
+  --color-text-muted: #5a7a99;
+
+  --glow-cyan: 77, 166, 255;
+  --glow-green: 0, 230, 118;
+  --glow-red: 255, 61, 113;
+  --glow-yellow: 255, 170, 0;
+}
+
+/* ═══════ Matrix Green ═══════ */
+html[data-theme="matrix-green"] {
+  --color-cyber-black: #000000;
+  --color-cyber-dark: #050a05;
+  --color-cyber-panel: #0a120a;
+  --color-cyber-border: #1a2e1a;
+  --color-neon-cyan: #00ff41;
+  --color-neon-green: #00ff41;
+  --color-neon-red: #ff2200;
+  --color-neon-yellow: #ccff00;
+  --color-text-primary: #b0ffb0;
+  --color-text-secondary: #60aa60;
+  --color-text-muted: #3a7a3a;
+
+  --glow-cyan: 0, 255, 65;
+  --glow-green: 0, 255, 65;
+  --glow-red: 255, 34, 0;
+  --glow-yellow: 204, 255, 0;
+}
+
+/* ═══════ Synthwave Purple ═══════ */
+html[data-theme="synthwave"] {
+  --color-cyber-black: #1a0a2e;
+  --color-cyber-dark: #1f0e38;
+  --color-cyber-panel: #2a1248;
+  --color-cyber-border: #3a1f5e;
+  --color-neon-cyan: #ff6ec7;
+  --color-neon-green: #00ffcc;
+  --color-neon-red: #ff3860;
+  --color-neon-yellow: #ffe66d;
+  --color-text-primary: #ede0f5;
+  --color-text-secondary: #a88bc7;
+  --color-text-muted: #7a5f99;
+
+  --glow-cyan: 255, 110, 199;
+  --glow-green: 0, 255, 204;
+  --glow-red: 255, 56, 96;
+  --glow-yellow: 255, 230, 109;
+}
+
+/* ═══════ Stealth Dark ═══════ */
+html[data-theme="stealth"] {
+  --color-cyber-black: #111111;
+  --color-cyber-dark: #161616;
+  --color-cyber-panel: #1a1a1a;
+  --color-cyber-border: #2a2a2a;
+  --color-neon-cyan: #a0a0a0;
+  --color-neon-green: #b0b0b0;
+  --color-neon-red: #d04040;
+  --color-neon-yellow: #c0a040;
+  --color-text-primary: #d0d0d0;
+  --color-text-secondary: #909090;
+  --color-text-muted: #606060;
+
+  --glow-cyan: 160, 160, 160;
+  --glow-green: 176, 176, 176;
+  --glow-red: 208, 64, 64;
+  --glow-yellow: 192, 160, 64;
+}
+
+/* Stealth theme: suppress flashy animations */
+html[data-theme="stealth"] .glitch-text {
+  animation: none !important;
+}
+html[data-theme="stealth"] [class*="neon-pulse"] {
+  animation: none !important;
+}

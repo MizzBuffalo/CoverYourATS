@@ -175,10 +175,14 @@ export default function Step4_Optimize() {
   const reScoreWithRewrites = (rewrites: RewrittenBullet[]) => {
     if (!resumeRawText) return
 
-    // Build an augmented resume text with rewritten bullets
+    // Replace original bullet text with rewritten versions
     let augmentedText = resumeRawText
     for (const rw of rewrites) {
-      augmentedText += '\n' + rw.rewritten
+      if (rw.original && augmentedText.includes(rw.original)) {
+        augmentedText = augmentedText.replace(rw.original, rw.rewritten)
+      } else {
+        augmentedText += '\n' + rw.rewritten
+      }
     }
 
     const newResults = matchKeywordsAgainstResume(jobKeywords, augmentedText)
@@ -269,6 +273,14 @@ export default function Step4_Optimize() {
               <p className="text-xs text-text-muted mt-1">
                 Use the prompt buttons below to get results from ChatGPT, Claude, or any AI chat.
               </p>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={runOptimization}
+                className="mt-2"
+              >
+                Retry
+              </Button>
             </div>
           </div>
         </Card>

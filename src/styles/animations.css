@@ -30,10 +30,10 @@
 /* Neon border glow */
 @keyframes border-glow {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(0, 255, 204, 0.3), inset 0 0 5px rgba(0, 255, 204, 0.1);
+    box-shadow: 0 0 5px rgba(var(--glow-cyan), 0.3), inset 0 0 5px rgba(var(--glow-cyan), 0.1);
   }
   50% {
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.5), inset 0 0 10px rgba(0, 255, 204, 0.15);
+    box-shadow: 0 0 15px rgba(var(--glow-cyan), 0.5), inset 0 0 10px rgba(var(--glow-cyan), 0.15);
   }
 }
 

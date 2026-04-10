@@ -20,10 +20,10 @@ export function ProgressBar({
   const clamped = Math.max(0, Math.min(100, value))
 
   const barColors = {
-    cyan: 'bg-neon-cyan shadow-[0_0_10px_rgba(0,255,204,0.5)]',
-    green: 'bg-neon-green shadow-[0_0_10px_rgba(57,255,20,0.5)]',
-    red: 'bg-neon-red shadow-[0_0_10px_rgba(255,0,64,0.5)]',
-    yellow: 'bg-neon-yellow shadow-[0_0_10px_rgba(255,204,0,0.5)]',
+    cyan: 'bg-neon-cyan shadow-[0_0_10px_rgba(var(--glow-cyan),0.5)]',
+    green: 'bg-neon-green shadow-[0_0_10px_rgba(var(--glow-green),0.5)]',
+    red: 'bg-neon-red shadow-[0_0_10px_rgba(var(--glow-red),0.5)]',
+    yellow: 'bg-neon-yellow shadow-[0_0_10px_rgba(var(--glow-yellow),0.5)]',
   }
 
   return (

@@ -13,7 +13,7 @@ export default function Step1_JobInput() {
   const jobRawText = useAppStore((s) => s.jobRawText)
   const setJobText = useAppStore((s) => s.setJobText)
 
-  const handleFileLoaded = (text: string) => {
+  const handleFileLoaded = (text: string, _fileName?: string) => {
     setJobText(normalizeText(text))
     setMethod('paste') // Switch to paste view to show extracted text
   }
