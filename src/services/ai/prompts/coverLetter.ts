@@ -6,8 +6,8 @@ export function buildCoverLetterPrompt(
   matchedKeywords: ExtractedKeyword[],
   missingKeywords: ExtractedKeyword[]
 ): string {
-  const matched = matchedKeywords.map((k) => k.keyword).join(', ')
-  const missing = missingKeywords.map((k) => k.keyword).join(', ')
+  const matched = matchedKeywords.map((k) => k.keyword).join(', ') || 'None identified'
+  const missing = missingKeywords.map((k) => k.keyword).join(', ') || 'None identified'
 
   return `You are an expert cover letter writer. Write a professional, tailored cover letter based on the job posting and resume provided.
 

@@ -16,7 +16,7 @@ export function TerminalText({ lines, speed = 30, className, onComplete }: Termi
 
   useEffect(() => {
     if (currentLine >= lines.length) {
-      setDone(true)
+      setDone(true) // eslint-disable-line react-hooks/set-state-in-effect -- terminal animation state machine
       onComplete?.()
       return
     }

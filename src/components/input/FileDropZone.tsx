@@ -85,6 +85,9 @@ export function FileDropZone({ onFileLoaded, className }: FileDropZoneProps) {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label="Upload file: PDF, DOCX, or TXT"
       onDragOver={(e) => {
         e.preventDefault()
         setIsDragging(true)
@@ -92,6 +95,12 @@ export function FileDropZone({ onFileLoaded, className }: FileDropZoneProps) {
       onDragLeave={() => setIsDragging(false)}
       onDrop={handleDrop}
       onClick={() => inputRef.current?.click()}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          inputRef.current?.click()
+        }
+      }}
       className={cn(
         'border-2 border-dashed rounded-[var(--theme-radius)] p-8 text-center cursor-pointer transition-all',
         isDragging

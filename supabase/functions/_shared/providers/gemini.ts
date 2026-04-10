@@ -1,6 +1,6 @@
 import type { ProviderRequest, ProviderResponse } from './types.ts'
 
-const GEMINI_MODEL = 'gemini-2.5-flash-preview-05-20'
+const GEMINI_MODEL = 'gemini-2.5-flash'
 
 export async function callGemini(request: ProviderRequest): Promise<ProviderResponse> {
   const apiKey = Deno.env.get('GEMINI_API_KEY')

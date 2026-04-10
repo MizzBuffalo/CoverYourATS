@@ -34,7 +34,7 @@ export default function Step3_Analysis() {
     if (overallScore !== null) return // Already analyzed
     if (!jobRawText || !resumeRawText) return
 
-    setIsScanning(true)
+    setIsScanning(true) // eslint-disable-line react-hooks/set-state-in-effect -- triggers scan animation on mount
   }, [jobRawText, resumeRawText, overallScore])
 
   // Re-score when custom keywords change (after initial analysis)

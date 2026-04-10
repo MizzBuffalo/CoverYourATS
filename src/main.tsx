@@ -4,6 +4,9 @@ import './styles/globals.css'
 import './styles/themes.css'
 import './styles/animations.css'
 import App from './App.tsx'
+import { initAnalytics } from './services/analytics'
+
+initAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

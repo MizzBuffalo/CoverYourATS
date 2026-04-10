@@ -13,7 +13,7 @@ export default function Step2_ResumeInput() {
   const resumeRawText = useAppStore((s) => s.resumeRawText)
   const setResumeText = useAppStore((s) => s.setResumeText)
 
-  const handleFileLoaded = (text: string, _fileName?: string) => {
+  const handleFileLoaded = (text: string) => {
     setResumeText(normalizeText(text))
     setMethod('paste')
   }
