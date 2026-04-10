@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
 import { useAppStore } from '../../stores/useAppStore'
@@ -6,6 +6,7 @@ import { ScanningOverlay } from '../animations/ScanningOverlay'
 import { ScoreDashboard } from '../analysis/ScoreDashboard'
 import { KeywordGrid } from '../analysis/KeywordGrid'
 import { GapAlert } from '../analysis/GapAlert'
+import { CustomKeywordInput } from '../analysis/CustomKeywordInput'
 import { extractKeywords } from '../../services/keywords/extractionPipeline'
 import { matchKeywordsAgainstResume } from '../../services/scoring/matchEngine'
 import { scoreByCategoryFromResults } from '../../services/scoring/categoryScorer'
@@ -16,6 +17,8 @@ export default function Step3_Analysis() {
   const nextStep = useAppStore((s) => s.nextStep)
   const jobRawText = useAppStore((s) => s.jobRawText)
   const resumeRawText = useAppStore((s) => s.resumeRawText)
+  const jobKeywords = useAppStore((s) => s.jobKeywords)
+  const customKeywords = useAppStore((s) => s.customKeywords)
   const setJobKeywords = useAppStore((s) => s.setJobKeywords)
   const setAnalysis = useAppStore((s) => s.setAnalysis)
   const overallScore = useAppStore((s) => s.overallScore)
@@ -25,6 +28,7 @@ export default function Step3_Analysis() {
 
   const [isScanning, setIsScanning] = useState(false)
   const [scanComplete, setScanComplete] = useState(overallScore !== null)
+  const prevCustomCountRef = useRef(customKeywords.length)
 
   useEffect(() => {
     if (overallScore !== null) return // Already analyzed
@@ -33,13 +37,36 @@ export default function Step3_Analysis() {
     setIsScanning(true)
   }, [jobRawText, resumeRawText, overallScore])
 
-  const runAnalysis = async () => {
+  // Re-score when custom keywords change (after initial analysis)
+  useEffect(() => {
+    if (!scanComplete || !resumeRawText) return
+    if (customKeywords.length === prevCustomCountRef.current) return
+    prevCustomCountRef.current = customKeywords.length
+
+    // Merge extracted + custom, then re-match
+    const allKeywords = [...jobKeywords, ...customKeywords]
+    const results = matchKeywordsAgainstResume(allKeywords, resumeRawText)
+    const catScores = scoreByCategoryFromResults(results)
+    const overall = calculateOverallScore(catScores)
+
+    setAnalysis({
+      overallScore: overall,
+      categoryScores: catScores,
+      matchResults: results,
+      matchedKeywords: results.filter((r) => r.found).map((r) => r.keyword),
+      missingKeywords: results.filter((r) => !r.found).map((r) => r.keyword),
+    })
+  }, [customKeywords, scanComplete, jobKeywords, resumeRawText, setAnalysis])
+
+  const runAnalysis = useCallback(async () => {
     if (!jobRawText || !resumeRawText) return
 
     const keywords = await extractKeywords(jobRawText)
     setJobKeywords(keywords)
 
-    const results = matchKeywordsAgainstResume(keywords, resumeRawText)
+    // Include any pre-existing custom keywords
+    const allKeywords = [...keywords, ...customKeywords]
+    const results = matchKeywordsAgainstResume(allKeywords, resumeRawText)
     const catScores = scoreByCategoryFromResults(results)
     const overall = calculateOverallScore(catScores)
 
@@ -55,7 +82,7 @@ export default function Step3_Analysis() {
     })
 
     setScanComplete(true)
-  }
+  }, [jobRawText, resumeRawText, customKeywords, setJobKeywords, setAnalysis])
 
   const handleScanComplete = () => {
     setIsScanning(false)
@@ -103,6 +130,10 @@ export default function Step3_Analysis() {
               <GapAlert missingKeywords={missingKeywords} maxShow={8} />
             </div>
           </div>
+
+          <Card>
+            <CustomKeywordInput />
+          </Card>
 
           <Card>
             <h3 className="font-mono text-sm text-neon-cyan uppercase tracking-wider mb-4">

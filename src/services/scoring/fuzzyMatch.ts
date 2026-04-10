@@ -1,3 +1,5 @@
+import { getSynonyms } from './synonyms'
+
 // Synonym and abbreviation maps for fuzzy matching
 const ABBREVIATIONS: Record<string, string[]> = {
   'javascript': ['js', 'javascript'],
@@ -74,7 +76,19 @@ export function fuzzyMatchKeyword(keyword: string, resumeText: string): FuzzyMat
     }
   }
 
-  // 3. Stem match
+  // 3. Synonym match
+  const synonyms = getSynonyms(lower)
+  if (synonyms) {
+    for (const syn of synonyms) {
+      if (syn === lower) continue
+      const synRegex = new RegExp(`\\b${escapeRegex(syn)}\\b`, 'i')
+      if (synRegex.test(resumeLower)) {
+        return { found: true, matchType: 'synonym', matchedText: syn }
+      }
+    }
+  }
+
+  // 4. Stem match
   const keywordStem = stem(lower)
   if (keywordStem.length >= 3) {
     const words = resumeLower.split(/\s+/)

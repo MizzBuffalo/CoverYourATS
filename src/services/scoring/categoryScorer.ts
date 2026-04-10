@@ -24,7 +24,11 @@ export function scoreByCategoryFromResults(
   return CATEGORY_ORDER.map((cat) => {
     const { matched, missing } = grouped.get(cat)!
     const total = matched.length + missing.length
-    const score = total > 0 ? Math.round((matched.length / total) * 100) : 0
+
+    // Importance-weighted scoring: "required" keywords count more than "nice to have"
+    const matchedWeight = matched.reduce((sum, kw) => sum + kw.importance, 0)
+    const totalWeight = matchedWeight + missing.reduce((sum, kw) => sum + kw.importance, 0)
+    const score = totalWeight > 0 ? Math.round((matchedWeight / totalWeight) * 100) : 0
 
     return { category: cat, matched, missing, total, score }
   })
