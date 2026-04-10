@@ -11,7 +11,9 @@ export type AppState = UISlice &
   ResumeSlice &
   AnalysisSlice &
   RewriteSlice &
-  CoverLetterSlice
+  CoverLetterSlice & {
+    fullReset: () => void
+  }
 
 export const useAppStore = create<AppState>()((...args) => ({
   ...createUISlice(...args),
@@ -20,4 +22,15 @@ export const useAppStore = create<AppState>()((...args) => ({
   ...createAnalysisSlice(...args),
   ...createRewriteSlice(...args),
   ...createCoverLetterSlice(...args),
+  fullReset: () => {
+    const [set] = args
+    const state = useAppStore.getState()
+    state.reset()
+    state.clearJob()
+    state.clearResume()
+    state.clearAnalysis()
+    state.clearRewrites()
+    state.clearCoverLetter()
+    set({ currentStep: 1 })
+  },
 }))

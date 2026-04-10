@@ -5,6 +5,7 @@ import { DocumentPreview } from '../export/DocumentPreview'
 
 export default function Step5_Export() {
   const setStep = useAppStore((s) => s.setStep)
+  const fullReset = useAppStore((s) => s.fullReset)
   const overallScore = useAppStore((s) => s.overallScore)
   const afterOverallScore = useAppStore((s) => s.afterOverallScore)
   const categoryScores = useAppStore((s) => s.categoryScores)
@@ -14,8 +15,7 @@ export default function Step5_Export() {
   const missingKeywords = useAppStore((s) => s.missingKeywords)
 
   const handleStartOver = () => {
-    // Go back to step 1 (full reset would clear data — let user navigate back instead)
-    setStep(1)
+    fullReset()
   }
 
   return (
