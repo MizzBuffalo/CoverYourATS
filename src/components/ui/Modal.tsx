@@ -31,7 +31,7 @@ export function Modal({ open, onClose, title, children, className }: ModalProps)
     >
       <div
         className={cn(
-          'bg-cyber-panel border border-cyber-border rounded-sm shadow-[0_0_30px_rgba(0,255,204,0.1)]',
+          'bg-cyber-panel border border-cyber-border rounded-sm shadow-[0_0_30px_rgba(var(--glow-cyan),0.1)]',
           'w-full max-w-lg mx-4 animate-[fade-in-up_0.2s_ease-out]',
           className
         )}

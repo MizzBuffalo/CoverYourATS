@@ -6,13 +6,15 @@ import { createResumeSlice, type ResumeSlice } from './slices/resumeSlice'
 import { createAnalysisSlice, type AnalysisSlice } from './slices/analysisSlice'
 import { createRewriteSlice, type RewriteSlice } from './slices/rewriteSlice'
 import { createCoverLetterSlice, type CoverLetterSlice } from './slices/coverLetterSlice'
+import { createThemeSlice, hydrateTheme, type ThemeSlice } from './slices/themeSlice'
 
 export type AppState = UISlice &
   JobSlice &
   ResumeSlice &
   AnalysisSlice &
   RewriteSlice &
-  CoverLetterSlice & {
+  CoverLetterSlice &
+  ThemeSlice & {
     fullReset: () => void
   }
 
@@ -39,6 +41,7 @@ export const useAppStore = create<AppState>()(
       ...createAnalysisSlice(...args),
       ...createRewriteSlice(...args),
       ...createCoverLetterSlice(...args),
+      ...createThemeSlice(...args),
       fullReset: () => {
         const [set] = args
         const state = useAppStore.getState()
@@ -64,6 +67,11 @@ export const useAppStore = create<AppState>()(
           }
         }
         return persisted
+      },
+      onRehydrateStorage: () => (state) => {
+        if (state?.theme) {
+          hydrateTheme(state.theme)
+        }
       },
     }
   )
