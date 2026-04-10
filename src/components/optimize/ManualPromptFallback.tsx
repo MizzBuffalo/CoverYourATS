@@ -32,7 +32,7 @@ export function ManualPromptFallback({ prompt, title = 'Copy AI Prompt' }: Manua
     <Card glow glowColor="cyan">
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h4 className="font-mono text-sm text-neon-cyan uppercase tracking-wider">
+          <h4 className="theme-label text-sm text-neon-cyan">
             {title}
           </h4>
           <Button size="sm" onClick={handleCopy}>
@@ -42,7 +42,7 @@ export function ManualPromptFallback({ prompt, title = 'Copy AI Prompt' }: Manua
         <p className="text-xs text-text-secondary">
           Paste this prompt into Claude, ChatGPT, or any AI chat for personalized results.
         </p>
-        <pre className="bg-cyber-dark border border-cyber-border rounded-sm p-3 text-xs font-mono text-text-secondary max-h-48 overflow-y-auto whitespace-pre-wrap">
+        <pre className="bg-cyber-dark border border-cyber-border rounded-[var(--theme-radius)] p-3 text-xs font-mono text-text-secondary max-h-48 overflow-y-auto whitespace-pre-wrap">
           {prompt}
         </pre>
       </div>

@@ -11,7 +11,7 @@ export function KeywordChip({ keyword, matched, matchType, className }: KeywordC
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 px-2.5 py-1 text-xs font-mono border rounded-sm transition-all',
+        'inline-flex items-center gap-1 px-2.5 py-1 text-xs font-mono border rounded-[var(--theme-radius)] transition-all',
         matched
           ? 'bg-neon-green/10 text-neon-green border-neon-green/30'
           : 'bg-neon-red/10 text-neon-red border-neon-red/30 animate-[neon-pulse_2s_ease-in-out_infinite]',

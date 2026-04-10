@@ -23,7 +23,7 @@ export function AIStatusIndicator({ status, remaining }: AIStatusIndicatorProps)
         {text}
       </Badge>
       {remaining !== undefined && status === 'success' && (
-        <span className="text-xs font-mono text-text-muted">
+        <span className="text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] text-text-muted">
           {remaining} requests remaining today
         </span>
       )}

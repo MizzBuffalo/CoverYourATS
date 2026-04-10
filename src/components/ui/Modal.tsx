@@ -31,14 +31,14 @@ export function Modal({ open, onClose, title, children, className }: ModalProps)
     >
       <div
         className={cn(
-          'bg-cyber-panel border border-cyber-border rounded-sm shadow-[0_0_30px_rgba(var(--glow-cyan),0.1)]',
+          'theme-card-bg border border-cyber-border rounded-[var(--theme-radius-lg)] shadow-[0_0_30px_rgba(var(--glow-cyan),0.1)]',
           'w-full max-w-lg mx-4 animate-[fade-in-up_0.2s_ease-out]',
           className
         )}
       >
         {title && (
           <div className="px-5 py-3 border-b border-cyber-border">
-            <h2 className="font-mono text-neon-cyan text-sm uppercase tracking-wider">{title}</h2>
+            <h2 className="theme-label text-neon-cyan text-sm">{title}</h2>
           </div>
         )}
         <div className="p-5">{children}</div>

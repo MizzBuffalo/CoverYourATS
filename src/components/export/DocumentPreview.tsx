@@ -24,20 +24,20 @@ export function DocumentPreview({
       {overallScore !== null && (
         <Card>
           <div className="flex items-center justify-between mb-3">
-            <h4 className="font-mono text-xs text-neon-cyan uppercase tracking-wider">
+            <h4 className="theme-label text-xs text-neon-cyan">
               Score Summary
             </h4>
           </div>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-text-muted font-mono text-xs">BEFORE</span>
-              <p className="text-xl font-mono font-bold text-neon-red">{overallScore}%</p>
+              <span className="text-text-muted font-[family-name:var(--theme-heading-font,var(--font-mono))] text-xs">BEFORE</span>
+              <p className="text-xl font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold text-neon-red">{overallScore}%</p>
             </div>
             {afterOverallScore !== null && (
               <div>
-                <span className="text-text-muted font-mono text-xs">AFTER</span>
+                <span className="text-text-muted font-[family-name:var(--theme-heading-font,var(--font-mono))] text-xs">AFTER</span>
                 <p className={cn(
-                  'text-xl font-mono font-bold',
+                  'text-xl font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold',
                   afterOverallScore >= 80 ? 'text-neon-green' : 'text-neon-yellow'
                 )}>
                   {afterOverallScore}%
@@ -48,7 +48,7 @@ export function DocumentPreview({
           {categoryScores.length > 0 && (
             <div className="mt-3 space-y-1">
               {categoryScores.filter((cs) => cs.total > 0).map((cs) => (
-                <div key={cs.category} className="flex justify-between text-xs font-mono">
+                <div key={cs.category} className="flex justify-between text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))]">
                   <span className="text-text-muted">{cs.category.replace('_', ' ').toUpperCase()}</span>
                   <span className="text-text-secondary">{cs.matched.length}/{cs.total}</span>
                 </div>
@@ -62,7 +62,7 @@ export function DocumentPreview({
       {rewrittenBullets.length > 0 && (
         <Card>
           <div className="flex items-center justify-between mb-3">
-            <h4 className="font-mono text-xs text-neon-cyan uppercase tracking-wider">
+            <h4 className="theme-label text-xs text-neon-cyan">
               Optimized Bullets
             </h4>
             <CopyButton
@@ -91,12 +91,12 @@ export function DocumentPreview({
       {coverLetter && (
         <Card>
           <div className="flex items-center justify-between mb-3">
-            <h4 className="font-mono text-xs text-neon-cyan uppercase tracking-wider">
+            <h4 className="theme-label text-xs text-neon-cyan">
               Cover Letter
             </h4>
             <CopyButton text={coverLetter} label="Copy Letter" />
           </div>
-          <div className="bg-cyber-dark border border-cyber-border rounded-sm p-4 whitespace-pre-wrap text-sm text-text-primary leading-relaxed max-h-64 overflow-y-auto">
+          <div className="bg-cyber-dark border border-cyber-border rounded-[var(--theme-radius)] p-4 whitespace-pre-wrap text-sm text-text-primary leading-relaxed max-h-64 overflow-y-auto">
             {coverLetter}
           </div>
         </Card>

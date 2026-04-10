@@ -62,7 +62,7 @@ export function ExportPanel({
 
   return (
     <Card glow glowColor="cyan">
-      <h3 className="font-mono text-sm text-neon-cyan uppercase tracking-wider mb-4">
+      <h3 className="theme-label text-sm text-neon-cyan mb-4">
         Export Options
       </h3>
 
@@ -88,7 +88,7 @@ export function ExportPanel({
       </div>
 
       {!hasContent && (
-        <p className="text-xs text-text-muted mt-3 text-center font-mono">
+        <p className="text-xs text-text-muted mt-3 text-center font-[family-name:var(--theme-heading-font,var(--font-mono))]">
           Complete Step 4 (Optimize) first to generate exportable content.
         </p>
       )}

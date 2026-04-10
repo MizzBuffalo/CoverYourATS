@@ -17,7 +17,7 @@ export function NeonBorder({ color = 'cyan', animate = true, children, className
   return (
     <div
       className={cn(
-        'border rounded-sm',
+        'border rounded-[var(--theme-radius)]',
         borderColors[color],
         animate && 'animate-[border-glow_3s_ease-in-out_infinite]',
         className

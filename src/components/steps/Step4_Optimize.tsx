@@ -222,7 +222,7 @@ export default function Step4_Optimize() {
   return (
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out] relative">
       <div>
-        <h2 className="font-mono text-neon-cyan text-lg uppercase tracking-wider mb-1">
+        <h2 className="theme-label text-neon-cyan text-lg mb-1">
           Step 4: Rewrite & Optimize
         </h2>
         <p className="text-text-secondary text-sm">
@@ -289,7 +289,7 @@ export default function Step4_Optimize() {
       {/* Before/After Score Comparison */}
       {overallScore !== null && afterOverallScore !== null && (
         <Card glow glowColor="green">
-          <h3 className="font-mono text-sm text-neon-green uppercase tracking-wider mb-4 text-center">
+          <h3 className="theme-label text-sm text-neon-green mb-4 text-center">
             Score Improvement
           </h3>
           <ScoreComparison
@@ -309,7 +309,7 @@ export default function Step4_Optimize() {
 
       {/* Manual Prompt Fallbacks — always visible */}
       <div className="space-y-4">
-        <h3 className="font-mono text-xs text-text-muted uppercase tracking-wider">
+        <h3 className="theme-label text-xs text-text-muted">
           {hasResults ? 'Try a different AI' : 'Manual AI Prompts'}
         </h3>
 

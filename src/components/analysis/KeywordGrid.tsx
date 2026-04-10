@@ -17,7 +17,7 @@ export function KeywordGrid({ matchResults, category }: KeywordGridProps) {
 
   return (
     <div className="space-y-2">
-      <h4 className="font-mono text-xs text-text-muted uppercase tracking-wider">
+      <h4 className="theme-label text-xs text-text-muted">
         {CATEGORY_LABELS[category]}
       </h4>
       <div className="flex flex-wrap gap-1.5">

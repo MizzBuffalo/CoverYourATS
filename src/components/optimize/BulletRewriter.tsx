@@ -11,7 +11,7 @@ export function BulletRewriter({ bullets }: BulletRewriterProps) {
 
   return (
     <Card>
-      <h3 className="font-mono text-sm text-neon-cyan uppercase tracking-wider mb-4">
+      <h3 className="theme-label text-sm text-neon-cyan mb-4">
         Rewritten Bullets
       </h3>
       <div className="space-y-3">

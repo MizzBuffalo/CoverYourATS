@@ -36,10 +36,10 @@ export function ProgressBar({
           )}
         </div>
       )}
-      <div className="h-2 bg-cyber-dark rounded-sm overflow-hidden border border-cyber-border">
+      <div className="h-2 bg-cyber-dark rounded-[var(--theme-radius)] overflow-hidden border border-cyber-border">
         <div
           className={cn(
-            'h-full rounded-sm transition-all duration-700 ease-out',
+            'h-full rounded-[var(--theme-radius)] transition-all duration-700 ease-out',
             barColors[color],
             animate && 'animate-[bar-fill_1s_ease-out]'
           )}

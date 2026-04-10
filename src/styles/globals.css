@@ -19,7 +19,9 @@
 
 @layer base {
   body {
-    @apply bg-cyber-black text-text-primary font-sans antialiased;
+    @apply bg-cyber-black text-text-primary antialiased;
+    font-family: var(--theme-body-font, var(--font-sans));
+    text-shadow: var(--theme-text-shadow, none);
     min-height: 100vh;
   }
 
@@ -28,9 +30,10 @@
     content: '';
     position: fixed;
     inset: 0;
+    display: var(--theme-grid-display, block);
     background-image:
-      linear-gradient(rgba(var(--glow-cyan), 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(var(--glow-cyan), 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(var(--glow-cyan), var(--theme-grid-opacity, 0.03)) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--glow-cyan), var(--theme-grid-opacity, 0.03)) 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none;
     z-index: 0;
@@ -42,6 +45,20 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+
+  /* Theme-aware label styling (replaces font-mono uppercase tracking-wider) */
+  .theme-label {
+    font-family: var(--theme-heading-font, var(--font-mono));
+    letter-spacing: var(--theme-label-tracking, 0.05em);
+    text-transform: var(--theme-label-transform, uppercase);
+    font-weight: var(--theme-label-weight, 600);
+  }
+
+  /* Theme-aware card background (supports gradients for synthwave) */
+  .theme-card-bg {
+    background: var(--theme-card-bg, var(--color-cyber-panel));
+    backdrop-filter: var(--theme-card-backdrop, none);
   }
 
   /* Scrollbar styling */

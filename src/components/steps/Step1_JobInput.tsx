@@ -21,7 +21,7 @@ export default function Step1_JobInput() {
   return (
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out]">
       <div>
-        <h2 className="font-mono text-neon-cyan text-lg uppercase tracking-wider mb-1">
+        <h2 className="theme-label text-neon-cyan text-lg mb-1">
           Step 1: Target Acquisition
         </h2>
         <p className="text-text-secondary text-sm">

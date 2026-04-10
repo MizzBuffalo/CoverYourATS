@@ -19,7 +19,9 @@ export function Badge({ variant = 'cyan', children, className, pulse = false }: 
   return (
     <span
       className={cn(
-        'inline-flex items-center px-2 py-0.5 text-xs font-mono border rounded-sm',
+        'inline-flex items-center px-2 py-0.5 text-xs border',
+        'rounded-[var(--theme-radius)]',
+        'font-[family-name:var(--theme-heading-font,var(--font-mono))]',
         variants[variant],
         pulse && 'animate-[neon-pulse_2s_ease-in-out_infinite]',
         className

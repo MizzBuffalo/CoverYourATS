@@ -93,7 +93,7 @@ export function FileDropZone({ onFileLoaded, className }: FileDropZoneProps) {
       onDrop={handleDrop}
       onClick={() => inputRef.current?.click()}
       className={cn(
-        'border-2 border-dashed rounded-sm p-8 text-center cursor-pointer transition-all',
+        'border-2 border-dashed rounded-[var(--theme-radius)] p-8 text-center cursor-pointer transition-all',
         isDragging
           ? 'border-neon-cyan bg-neon-cyan/5'
           : 'border-cyber-border hover:border-neon-cyan/30',
@@ -112,11 +112,11 @@ export function FileDropZone({ onFileLoaded, className }: FileDropZoneProps) {
       {isLoading ? (
         <div className="space-y-2">
           <div className="w-6 h-6 mx-auto border-2 border-neon-cyan border-t-transparent rounded-full animate-[spin_1s_linear_infinite]" />
-          <p className="text-sm font-mono text-neon-cyan">Parsing {fileName}...</p>
+          <p className="text-sm font-[family-name:var(--theme-heading-font,var(--font-mono))] text-neon-cyan">Parsing {fileName}...</p>
         </div>
       ) : fileName && !error ? (
         <div className="space-y-1">
-          <p className="text-sm font-mono text-neon-green">Loaded: {fileName}</p>
+          <p className="text-sm font-[family-name:var(--theme-heading-font,var(--font-mono))] text-neon-green">Loaded: {fileName}</p>
           <p className="text-xs text-text-muted">Click or drop to replace</p>
         </div>
       ) : (
@@ -127,11 +127,11 @@ export function FileDropZone({ onFileLoaded, className }: FileDropZoneProps) {
           <p className="text-sm text-text-secondary">
             Drop a file or click to browse
           </p>
-          <p className="text-xs text-text-muted font-mono">PDF, DOCX, or TXT</p>
+          <p className="text-xs text-text-muted font-[family-name:var(--theme-heading-font,var(--font-mono))]">PDF, DOCX, or TXT</p>
         </div>
       )}
 
-      {error && <p className="text-sm text-neon-red mt-2 font-mono">{error}</p>}
+      {error && <p className="text-sm text-neon-red mt-2 font-[family-name:var(--theme-heading-font,var(--font-mono))]">{error}</p>}
     </div>
   )
 }
