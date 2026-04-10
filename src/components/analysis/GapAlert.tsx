@@ -37,7 +37,7 @@ export function GapAlert({ missingKeywords, maxShow = 5 }: GapAlertProps) {
             ))}
           </div>
           {missingKeywords.length > maxShow && (
-            <p className="text-xs text-text-muted font-mono">
+            <p className="text-xs text-text-muted font-[family-name:var(--theme-heading-font,var(--font-mono))]">
               + {missingKeywords.length - maxShow} more missing keywords
             </p>
           )}

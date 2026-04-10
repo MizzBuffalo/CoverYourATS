@@ -1,5 +1,5 @@
 import type { AITask, AIResponse } from '../../types'
-import { EDGE_FUNCTION_URL } from '../../config/supabase'
+import { EDGE_FUNCTION_URL, SUPABASE_ANON_KEY } from '../../config/supabase'
 
 export async function callAI(task: AITask, prompt: string): Promise<AIResponse> {
   if (!EDGE_FUNCTION_URL) {
@@ -16,7 +16,10 @@ export async function callAI(task: AITask, prompt: string): Promise<AIResponse> 
 
     const response = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      },
       body: JSON.stringify({ task, prompt }),
       signal: controller.signal,
     })

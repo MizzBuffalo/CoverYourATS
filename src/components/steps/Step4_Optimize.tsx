@@ -256,7 +256,7 @@ export default function Step4_Optimize() {
             >
               Optimize with AI
             </Button>
-            <p className="text-[11px] text-text-muted font-mono">
+            <p className="text-[11px] text-text-muted font-[family-name:var(--theme-heading-font,var(--font-mono))]">
               Or scroll down to copy a prompt for your own AI tool
             </p>
           </div>
