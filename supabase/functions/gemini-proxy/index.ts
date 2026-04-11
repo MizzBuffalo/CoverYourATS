@@ -105,6 +105,7 @@ Deno.serve(async (req: Request) => {
     )
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error'
+    console.error(`[gemini-proxy] POST error: ${message}`)
     const isRateLimit = message.includes('RATE_LIMITED')
 
     return new Response(
