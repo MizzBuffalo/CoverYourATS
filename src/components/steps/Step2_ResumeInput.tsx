@@ -8,7 +8,7 @@ import { useAppStore } from '../../stores/useAppStore'
 import { normalizeText } from '../../services/parsers/textParser'
 
 export default function Step2_ResumeInput() {
-  const [method, setMethod] = useState<'paste' | 'upload'>('paste')
+  const [method, setMethod] = useState<'paste' | 'upload'>('upload')
   const nextStep = useAppStore((s) => s.nextStep)
   const resumeRawText = useAppStore((s) => s.resumeRawText)
   const setResumeText = useAppStore((s) => s.setResumeText)
@@ -22,10 +22,10 @@ export default function Step2_ResumeInput() {
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out]">
       <div>
         <h2 className="theme-label text-neon-cyan text-lg mb-1">
-          Step 2: Load Your Profile
+          Step 2: Drop Your Resume
         </h2>
         <p className="text-text-secondary text-sm">
-          Paste your resume below or upload a PDF/DOCX file.
+          Drop your resume here. We'll compare it against the job posting.
         </p>
       </div>
 
@@ -36,7 +36,7 @@ export default function Step2_ResumeInput() {
           <TextPasteArea
             value={resumeRawText || ''}
             onChange={setResumeText}
-            placeholder="Paste your full resume here — include all sections: summary, experience, education, skills..."
+            placeholder="Your resume goes here. The more detail, the better the match."
           />
         ) : (
           <FileDropZone onFileLoaded={handleFileLoaded} />
@@ -45,7 +45,7 @@ export default function Step2_ResumeInput() {
 
       <div className="flex justify-end">
         <Button onClick={nextStep} disabled={!resumeRawText?.trim()} size="lg">
-          Analyze Profile →
+          Scan Resume →
         </Button>
       </div>
     </div>
