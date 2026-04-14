@@ -22,10 +22,19 @@ export default function Step1_JobInput() {
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out]">
       <div>
         <h2 className="theme-label text-neon-cyan text-lg mb-1">
-          Step 1: Target Acquisition
+          Step 1: Job Intel
         </h2>
         <p className="text-text-secondary text-sm">
-          Paste the job posting below or upload a PDF/DOCX file.
+          Paste the full job posting below or upload a PDF/DOCX file.
+        </p>
+      </div>
+
+      <div className="space-y-1">
+        <p className="text-text-primary text-sm font-medium">
+          We scan for every keyword that matters — the ones listed AND the ones they expect but didn't write down.
+        </p>
+        <p className="text-text-muted text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))]">
+          1. Drop the job posting&ensp;2. Upload your resume&ensp;3. See what's missing
         </p>
       </div>
 
@@ -36,7 +45,7 @@ export default function Step1_JobInput() {
           <TextPasteArea
             value={jobRawText || ''}
             onChange={setJobText}
-            placeholder="Paste the full job posting here — include the job title, requirements, qualifications, and description..."
+            placeholder={'Paste the full job posting here — include the job title, requirements, qualifications, and description.\n\nExample:\nSenior Data Analyst - Nike, Inc.\nRequired: 5+ years experience, SQL, Python, Tableau...'}
           />
         ) : (
           <FileDropZone onFileLoaded={handleFileLoaded} />
@@ -45,7 +54,7 @@ export default function Step1_JobInput() {
 
       <div className="flex justify-end">
         <Button onClick={nextStep} disabled={!jobRawText?.trim()} size="lg">
-          Scan Target →
+          Analyze →
         </Button>
       </div>
     </div>
