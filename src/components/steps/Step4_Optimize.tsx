@@ -106,13 +106,25 @@ export default function Step4_Optimize() {
     if (rewriteResult.success && rewriteResult.data) {
       try {
         const parsed = parseBulletRewriteResponse(rewriteResult.data, bullets)
-        setRewrittenBullets(parsed)
-        gotResults = true
-
-        // Re-score with rewritten bullets
-        reScoreWithRewrites(parsed)
+        if (parsed.length > 0) {
+          setRewrittenBullets(parsed)
+          gotResults = true
+          reScoreWithRewrites(parsed)
+        } else {
+          setErrorMessage('AI returned empty bullet rewrites. Try again or use the prompt below.')
+        }
       } catch {
-        setErrorMessage('AI returned unexpected format for bullet rewrites.')
+        setErrorMessage('AI returned unexpected format for bullet rewrites. Try again or use the prompt below.')
+      }
+    } else if (rewriteResult.error) {
+      const err = rewriteResult.error
+      // Friendly messages for common errors
+      if (err.includes('503') || err.includes('overloaded') || err.includes('UNAVAILABLE')) {
+        setErrorMessage("Google's AI is busy right now. Try again in a minute or use the Copy Prompt button below.")
+      } else if (err.includes('timed out') || err.includes('timeout')) {
+        setErrorMessage('AI request timed out. Try again or use the Copy Prompt button below.')
+      } else {
+        setErrorMessage(err)
       }
     }
 
@@ -124,6 +136,11 @@ export default function Step4_Optimize() {
           : String(coverLetterResult.data)
       setCoverLetter(letterText)
       gotResults = true
+    } else if (coverLetterResult.error && !errorMessage) {
+      const err = coverLetterResult.error
+      if (err.includes('503') || err.includes('overloaded') || err.includes('UNAVAILABLE')) {
+        setErrorMessage("Google's AI is busy right now. Try again in a minute or use the Copy Prompt button below.")
+      }
     }
 
     if (gotResults) {
@@ -131,9 +148,9 @@ export default function Step4_Optimize() {
       setRemaining(rewriteResult.remaining ?? coverLetterResult.remaining)
     } else {
       setAIStatus('error')
-      setErrorMessage(
-        rewriteResult.error || coverLetterResult.error || 'AI optimization failed.'
-      )
+      if (!errorMessage) {
+        setErrorMessage('AI optimization failed. Try again or use the prompts below.')
+      }
     }
   }
 
@@ -141,33 +158,61 @@ export default function Step4_Optimize() {
     data: unknown,
     bullets: { id: string; text: string; sectionName: string }[]
   ): RewrittenBullet[] => {
-    let items: Array<{
-      index?: number
-      original?: string
-      rewritten?: string
-      keywords_added?: string[]
-    }>
+    let items: Array<Record<string, unknown>>
 
     if (typeof data === 'string') {
-      // Try to parse JSON from the string (Gemini sometimes wraps in markdown)
-      const cleaned = data.replace(/```json\s?/g, '').replace(/```/g, '').trim()
-      items = JSON.parse(cleaned)
+      // Extract JSON array from the string — Gemini often wraps in markdown or adds text
+      let cleaned = data
+        .replace(/```json\s*/gi, '')
+        .replace(/```\s*/g, '')
+        .trim()
+
+      // If there's text before/after the JSON, extract just the array
+      const arrayStart = cleaned.indexOf('[')
+      const arrayEnd = cleaned.lastIndexOf(']')
+      if (arrayStart !== -1 && arrayEnd > arrayStart) {
+        cleaned = cleaned.slice(arrayStart, arrayEnd + 1)
+      }
+
+      const parsed = JSON.parse(cleaned)
+      // Handle object wrapper: { bullets: [...] }, { rewrites: [...] }, { results: [...] }
+      if (Array.isArray(parsed)) {
+        items = parsed
+      } else if (parsed && typeof parsed === 'object') {
+        const arr = Object.values(parsed).find(Array.isArray)
+        if (arr) {
+          items = arr as Array<Record<string, unknown>>
+        } else {
+          throw new Error('No array found in response')
+        }
+      } else {
+        throw new Error('Unexpected JSON format')
+      }
     } else if (Array.isArray(data)) {
       items = data
+    } else if (data && typeof data === 'object') {
+      const arr = Object.values(data).find(Array.isArray)
+      if (arr) {
+        items = arr as Array<Record<string, unknown>>
+      } else {
+        throw new Error('Unexpected response format')
+      }
     } else {
       throw new Error('Unexpected response format')
     }
 
     return items
-      .filter((item) => item.rewritten)
+      .filter((item) => item.rewritten || item.rewritten_text || item.new_text || item.revised)
       .map((item, idx) => {
-        const bulletIdx = (item.index ?? idx + 1) - 1
+        const bulletIdx = ((item.index as number) ?? idx + 1) - 1
         const originalBullet = bullets[bulletIdx]
+        const rewrittenText = (item.rewritten ?? item.rewritten_text ?? item.new_text ?? item.revised) as string
+        const keywords = (item.keywords_added ?? item.keywords ?? item.added_keywords ?? []) as string[]
         return {
           originalId: originalBullet?.id ?? `bullet-${idx}`,
-          original: originalBullet?.text ?? item.original ?? '',
-          rewritten: item.rewritten!,
-          incorporatedKeywords: item.keywords_added ?? [],
+          original: originalBullet?.text ?? (item.original as string) ?? '',
+          rewritten: rewrittenText,
+          incorporatedKeywords: keywords,
         }
       })
   }

@@ -3,7 +3,7 @@
 // TODO: Upgrade to Supabase PostgreSQL-backed rate limiting for production
 
 const WINDOW_MS = 24 * 60 * 60 * 1000 // 24 hours
-const MAX_REQUESTS = 15
+const MAX_REQUESTS = 100
 
 interface RateLimitEntry {
   count: number

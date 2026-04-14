@@ -56,7 +56,7 @@ export async function callAI(task: AITask, prompt: string): Promise<AIResponse> 
 
   try {
     const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 45000) // 45s for retries
+    const timeout = setTimeout(() => controller.abort(), 30000) // 30s timeout
 
     const response = await fetchWithRetry(
       EDGE_FUNCTION_URL,
@@ -87,10 +87,15 @@ export async function callAI(task: AITask, prompt: string): Promise<AIResponse> 
     }
 
     if (!response.ok || !result.success) {
+      let error = result.error || 'AI request failed.'
+      // Friendly message for overloaded/unavailable
+      if (response.status === 503 || error.includes('503') || error.includes('overloaded') || error.includes('UNAVAILABLE')) {
+        error = "Google's AI is busy right now. Try again in a minute or use the Copy Prompt button."
+      }
       return {
         success: false,
         data: null,
-        error: result.error || 'AI request failed.',
+        error,
       }
     }
 

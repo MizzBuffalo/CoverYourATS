@@ -5,8 +5,11 @@ export function buildBulletRewritePrompt(
   missingKeywords: ExtractedKeyword[],
   jobTitle?: string
 ): string {
-  const keywordsStr = missingKeywords.map((k) => k.keyword).join(', ')
-  const bulletsStr = bullets
+  // Cap at 20 bullets and 30 keywords to keep prompt small and response fast
+  const cappedBullets = bullets.slice(0, 20)
+  const cappedKeywords = missingKeywords.slice(0, 30)
+  const keywordsStr = cappedKeywords.map((k) => k.keyword).join(', ')
+  const bulletsStr = cappedBullets
     .map((b, i) => `${i + 1}. [${b.sectionName}] ${b.text}`)
     .join('\n')
 
