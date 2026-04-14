@@ -102,11 +102,11 @@ export default function Step3_Analysis() {
       <div>
         <h2 className="theme-label text-white text-lg mb-1">
           <span className="text-white">Step 3:</span>{' '}
-          <span className="text-neon-cyan">Gap Analysis</span>
+          <span className="text-neon-cyan">What's Missing</span>
         </h2>
         <p className="text-text-secondary text-sm">
           {scanComplete
-            ? 'Analysis complete. Review your keyword match scores below.'
+            ? "Your resume vs. the job posting — here's where you stand. Green means you're covered, red means you're missing it."
             : 'Scanning your profile against target requirements...'}
         </p>
       </div>
@@ -149,7 +149,7 @@ export default function Step3_Analysis() {
 
           <div className="flex justify-end">
             <Button onClick={nextStep} size="lg">
-              Optimize →
+              Fix My Resume →
             </Button>
           </div>
         </>

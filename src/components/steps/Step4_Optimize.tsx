@@ -272,7 +272,7 @@ export default function Step4_Optimize() {
           <span className="text-neon-cyan">Rewrite & Optimize</span>
         </h2>
         <p className="text-text-secondary text-sm">
-          AI-powered resume bullet rewrites and cover letter generation.
+          We'll rewrite your bullets and draft a cover letter — or grab the prompts and do it yourself.
         </p>
       </div>
 
@@ -356,7 +356,7 @@ export default function Step4_Optimize() {
       {/* Manual Prompt Fallbacks — always visible */}
       <div className="space-y-4">
         <h3 className="theme-label text-xs text-text-muted">
-          {hasResults ? 'Try a different AI' : 'Manual AI Prompts'}
+          {hasResults ? 'Use Your Own AI' : 'Manual AI Prompts'}
         </h3>
 
         {fallbackRewritePrompt && (
@@ -376,7 +376,7 @@ export default function Step4_Optimize() {
       {/* Navigation */}
       <div className="flex justify-end">
         <Button onClick={nextStep} size="lg">
-          Export →
+          Download →
         </Button>
       </div>
     </div>

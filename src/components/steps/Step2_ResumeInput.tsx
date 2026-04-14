@@ -23,10 +23,10 @@ export default function Step2_ResumeInput() {
       <div>
         <h2 className="theme-label text-white text-lg mb-1">
           <span className="text-white">Step 2:</span>{' '}
-          <span className="text-neon-cyan">Drop Your Resume</span>
+          <span className="text-neon-cyan">Upload Your Resume</span>
         </h2>
         <p className="text-text-secondary text-sm">
-          Drop your resume here. We'll compare it against the job posting.
+          Upload or paste your resume. We'll find what's missing.
         </p>
       </div>
 
@@ -37,7 +37,7 @@ export default function Step2_ResumeInput() {
           <TextPasteArea
             value={resumeRawText || ''}
             onChange={setResumeText}
-            placeholder="Your resume goes here. The more detail, the better the match."
+            placeholder="Paste your full resume — work experience, education, skills, certifications..."
           />
         ) : (
           <FileDropZone onFileLoaded={handleFileLoaded} />
@@ -46,7 +46,7 @@ export default function Step2_ResumeInput() {
 
       <div className="flex justify-end">
         <Button onClick={nextStep} disabled={!resumeRawText?.trim()} size="lg">
-          Scan Resume →
+          Compare →
         </Button>
       </div>
     </div>
