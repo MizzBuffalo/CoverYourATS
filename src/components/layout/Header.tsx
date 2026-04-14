@@ -45,7 +45,7 @@ export function Header() {
                   : 'text-text-muted border-cyber-border hover:text-neon-cyan hover:border-neon-cyan/50'
               }`}
             >
-              {confirming ? 'Confirm Clear?' : 'New Scan'}
+              {confirming ? 'Sure? This clears everything.' : 'Start Over'}
             </button>
           )}
           <ThemePicker />
