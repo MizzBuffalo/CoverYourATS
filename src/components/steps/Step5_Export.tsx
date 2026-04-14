@@ -21,8 +21,9 @@ export default function Step5_Export() {
   return (
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out]">
       <div>
-        <h2 className="theme-label text-neon-cyan text-lg mb-1">
-          Step 5: Export Results
+        <h2 className="theme-label text-white text-lg mb-1">
+          <span className="text-white">Step 5:</span>{' '}
+          <span className="text-neon-cyan">Export Results</span>
         </h2>
         <p className="text-text-secondary text-sm">
           Copy your optimized content or download a PDF report.

@@ -21,8 +21,9 @@ export default function Step2_ResumeInput() {
   return (
     <div className="space-y-6 animate-[fade-in-up_0.3s_ease-out]">
       <div>
-        <h2 className="theme-label text-neon-cyan text-lg mb-1">
-          Step 2: Drop Your Resume
+        <h2 className="theme-label text-white text-lg mb-1">
+          <span className="text-white">Step 2:</span>{' '}
+          <span className="text-neon-cyan">Drop Your Resume</span>
         </h2>
         <p className="text-text-secondary text-sm">
           Drop your resume here. We'll compare it against the job posting.
