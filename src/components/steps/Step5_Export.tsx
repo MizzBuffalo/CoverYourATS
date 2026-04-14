@@ -26,7 +26,7 @@ export default function Step5_Export() {
           <span className="text-neon-cyan">Export Results</span>
         </h2>
         <p className="text-text-secondary text-sm">
-          Copy your optimized content or download a PDF report.
+          Your optimized resume and cover letter are ready. Copy or download below.
         </p>
       </div>
 
@@ -52,10 +52,10 @@ export default function Step5_Export() {
       {/* Navigation */}
       <div className="flex justify-between">
         <Button onClick={() => setStep(4)} variant="ghost" size="lg">
-          ← Back to Optimize
+          ← Go Back
         </Button>
         <Button onClick={handleStartOver} variant="secondary" size="lg">
-          Start New Scan
+          Scan Another Job
         </Button>
       </div>
     </div>

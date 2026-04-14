@@ -22,14 +22,14 @@ export function ScoreDashboard({ overallScore, categoryScores }: ScoreDashboardP
         ? 'shadow-[0_0_30px_rgba(var(--glow-yellow),0.3)]'
         : 'shadow-[0_0_30px_rgba(var(--glow-red),0.3)]'
 
-  const threatLevel =
-    overallScore >= 80
-      ? 'LOW'
-      : overallScore >= 60
-        ? 'MODERATE'
-        : overallScore >= 40
-          ? 'HIGH'
-          : 'CRITICAL'
+  const matchRating =
+    overallScore >= 76
+      ? 'EXCELLENT'
+      : overallScore >= 51
+        ? 'STRONG'
+        : overallScore >= 26
+          ? 'FAIR'
+          : 'WEAK'
 
   return (
     <div className="space-y-6">
@@ -53,7 +53,7 @@ export function ScoreDashboard({ overallScore, categoryScores }: ScoreDashboardP
             ATS Match Score
           </p>
           <p className={cn('text-sm font-[family-name:var(--theme-heading-font,var(--font-mono))] font-bold', scoreColor)}>
-            THREAT LEVEL: {threatLevel}
+            MATCH: {matchRating}
           </p>
         </div>
       </div>

@@ -21,7 +21,7 @@ export function GapAlert({ missingKeywords, maxShow = 5 }: GapAlertProps) {
         </span>
         <div className="space-y-2 flex-1">
           <h4 className="theme-label text-sm text-neon-red">
-            Critical Gaps Detected
+            High-Priority Gaps
           </h4>
           <p className="text-xs text-text-secondary">
             These high-priority keywords are missing from your resume:
