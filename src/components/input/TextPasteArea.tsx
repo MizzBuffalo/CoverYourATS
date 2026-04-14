@@ -35,16 +35,27 @@ export function TextPasteArea({ value, onChange, placeholder, className }: TextP
           isOverLimit && 'border-neon-red/50'
         )}
       />
-      {charCount > 0 && (
-        <span
-          className={cn(
-            'absolute bottom-3 right-3 text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))]',
-            isOverLimit ? 'text-neon-red' : 'text-text-muted'
-          )}
-        >
-          {charCount.toLocaleString()} / {MAX_CHARS.toLocaleString()}
-        </span>
-      )}
+      <div className="absolute bottom-3 right-3 flex items-center gap-3">
+        {charCount > 0 && (
+          <button
+            type="button"
+            onClick={() => onChange('')}
+            className="text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))] text-text-muted hover:text-neon-red transition-colors cursor-pointer"
+          >
+            Clear
+          </button>
+        )}
+        {charCount > 0 && (
+          <span
+            className={cn(
+              'text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))]',
+              isOverLimit ? 'text-neon-red' : 'text-text-muted'
+            )}
+          >
+            {charCount.toLocaleString()} / {MAX_CHARS.toLocaleString()}
+          </span>
+        )}
+      </div>
     </div>
   )
 }

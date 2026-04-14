@@ -29,13 +29,15 @@ export default function Step1_JobInput() {
         </p>
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-2">
         <p className="text-text-primary text-sm font-medium">
           We scan for every keyword that matters — the ones listed AND the ones they expect but didn't write down.
         </p>
-        <p className="text-text-muted text-xs font-[family-name:var(--theme-heading-font,var(--font-mono))]">
-          1. Drop the job posting&ensp;2. Upload your resume&ensp;3. See what's missing
-        </p>
+        <div className="space-y-0.5 text-sm text-text-secondary font-[family-name:var(--theme-heading-font,var(--font-mono))]">
+          <p>1. Drop the job posting</p>
+          <p>2. Upload your resume</p>
+          <p>3. See what's missing</p>
+        </div>
       </div>
 
       <InputMethodToggle method={method} onChange={setMethod} />
