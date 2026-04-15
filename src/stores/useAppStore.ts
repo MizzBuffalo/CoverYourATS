@@ -34,26 +34,56 @@ const TRANSIENT_KEYS: (keyof AppState)[] = [
 
 export const useAppStore = create<AppState>()(
   persist(
-    (...args) => ({
-      ...createUISlice(...args),
-      ...createJobSlice(...args),
-      ...createResumeSlice(...args),
-      ...createAnalysisSlice(...args),
-      ...createRewriteSlice(...args),
-      ...createCoverLetterSlice(...args),
-      ...createThemeSlice(...args),
-      fullReset: () => {
-        const [set] = args
-        const state = useAppStore.getState()
-        state.reset()
-        state.clearJob()
-        state.clearResume()
-        state.clearAnalysis()
-        state.clearRewrites()
-        state.clearCoverLetter()
-        set({ currentStep: 1 })
-      },
-    }),
+    (...args) => {
+      const slices = {
+        ...createUISlice(...args),
+        ...createJobSlice(...args),
+        ...createResumeSlice(...args),
+        ...createAnalysisSlice(...args),
+        ...createRewriteSlice(...args),
+        ...createCoverLetterSlice(...args),
+        ...createThemeSlice(...args),
+      }
+
+      // Clear all downstream data when inputs change
+      const originalSetJobText = slices.setJobText
+      const originalSetResumeText = slices.setResumeText
+
+      return {
+        ...slices,
+        setJobText: (text: string) => {
+          originalSetJobText(text)
+          const state = useAppStore.getState()
+          state.clearAnalysis()
+          state.clearRewrites()
+          state.clearCoverLetter()
+          // Clear extracted keywords since they came from the old job
+          const [set] = args
+          set({ jobKeywords: [], jobCategoryMap: { hard_skill: [], soft_skill: [], certification: [], tool: [], industry_term: [] }, customKeywords: [] })
+        },
+        setResumeText: (text: string) => {
+          originalSetResumeText(text)
+          const state = useAppStore.getState()
+          state.clearAnalysis()
+          state.clearRewrites()
+          state.clearCoverLetter()
+          // Clear parsed bullets since they came from the old resume
+          const [set] = args
+          set({ resumeSections: [], resumeBullets: [] })
+        },
+        fullReset: () => {
+          const [set] = args
+          const state = useAppStore.getState()
+          state.reset()
+          state.clearJob()
+          state.clearResume()
+          state.clearAnalysis()
+          state.clearRewrites()
+          state.clearCoverLetter()
+          set({ currentStep: 1 })
+        },
+      }
+    },
     {
       name: 'coveryourats-store',
       partialize: (state) => {
